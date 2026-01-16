@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Conclusão{% endblock %}
+
+{% block content %}
+<div class="row w-100 justify-content-center text-center">
+    <div class="col-11 col-md-8 col-lg-6 p-2 bg-white rounded-3 shadow-sm">
+
+        <h2 class="mb-4 fade-item">
+            Você encontrou o queijo sagrado! Uma jornada construída com carinho.
+        </h2>
+
+        <h2 class="mb-2 fade-item alert alert-info alert-final">
+            Isso não é sobre o queijo, mas sobre as etapas importantes de um relacionamento.
+        </h2>
+
+        <!-- Imagem final do personagem -->
+        <div class="mb-4 fade-item">
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='img/personagens/' ~ session.personagem ~ '-final.png'
+                ) }}"
+                alt="Personagem final"
+                class="img-fluid zoom-in"
+                style="max-height: 260px;"
+            >
+        </div>
+
+        <p class="lead mb-3 fade-item">
+            Relações maduras não evitam mudanças.
+        </p>
+
+        <p class="mb-4 fade-item">
+            Elas crescem com elas, porque foram construídas com presença,
+            cuidado e escolha.
+        </p>
+
+        <p class="fw-semibold fade-item">
+            Obrigado por percorrer essa jornada babyyyyyyyyyyyyyyy.
+        </p>
+
+        <!-- Botões -->
+        <div class="d-grid gap-3 mt-4 fade-item">
+
+            <!-- Reiniciar -->
+            <form method="post" action="{{ url_for('reiniciar') }}">
+                <button class="btn btn-outline-primary btn-lg w-100">
+                    Reiniciar jornada
+                </button>
+            </form>
+
+            <!-- Sair -->
+            <form method="post" action="{{ url_for('sair') }}">
+                <button class="btn btn-outline-secondary btn-lg w-100">
+                    Sair
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".fade-item").forEach((el, i) => {
+        setTimeout(() => el.classList.add("show"), i * 120);
+    });
+});
+</script>
+{% endblock %}

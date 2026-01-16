@@ -1,0 +1,11 @@
+# Força o uso do HTTPS
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redireciona para a página inicial (home)
+RewriteCond %{THE_REQUEST} \ /+([^\?\ ]*)
+RewriteRule ^ / [R=301,L]
+
+# Redireciona para a página inicial (home) se a URL for a raiz
+RewriteRule ^$ /home [L,R=301]

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Como Jogar{% endblock %}
+
+{% block content %}
+<div class="row w-100 justify-content-center">
+    <div class="col-11 col-md-8 col-lg-6 p-2 bg-white rounded-3 shadow-sm">
+
+        <h2 class="text-center mb-4 fade-item">
+            Como Jogar
+        </h2>
+
+        <ul class="list-group list-group-flush mb-4 fade-item">
+            <li class="list-group-item">
+                Leia com atenção o conteúdo de cada etapa.
+            </li>
+            <li class="list-group-item">
+                Interaja com os desafios apresentados para avançar.
+            </li>
+            <li class="list-group-item">
+                Não existe resposta perfeita, mas sim escolhas conscientes.
+            </li>
+            <li class="list-group-item">
+                Cada etapa representa uma fase da jornada.
+            </li>
+            <li class="list-group-item">
+                Aproveite o caminho, não apenas o destino.
+            </li>
+        </ul>
+
+        <form method="post" action="{{ url_for('iniciar_jogo') }}">
+            <button class="btn btn-primary btn-lg w-100 fade-item">
+                Começar!
+            </button>
+        </form>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".fade-item").forEach((el, i) => {
+        setTimeout(() => el.classList.add("show"), i * 120);
+    });
+});
+</script>
+{% endblock %}
