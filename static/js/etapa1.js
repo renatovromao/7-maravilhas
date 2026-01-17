@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const isCorrect = this.dataset.correct === "true";
 
             // Reset visual
-            feedback.className = "mb-3 fw-semibold";
+            feedback.className = "mb-2 fw-semibold";
 
             if (isCorrect) {
                 options.forEach(btn => btn.disabled = true);

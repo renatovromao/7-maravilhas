@@ -81,7 +81,7 @@ body {
 }
 /* Cartas */
 .game-card {
-    padding: 12px 18px;
+    padding: 3px 8px;
     background: white;
     border-radius: 10px;
     border: 2px solid #dee2e6;
@@ -107,7 +107,8 @@ body {
 /* Zonas */
 .drop-zone {
     min-height: 0px;
-    padding: 16px;
+    padding: 5px;
+    margin-bottom: 5px;
     border: 2px dashed #ced4da;
     border-radius: 12px;
     transition: background-color 0.3s ease;
@@ -303,8 +304,13 @@ body {
 }
 
 .alert-final {
-    font-size: 1.2rem;
-    padding: 16px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.alert-final2 {
+    font-size: 15px;
+    padding: 5px;
 }
 
 /* Zoom suave na imagem final */

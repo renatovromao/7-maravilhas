@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const overlay = document.getElementById("successOverlay");
 
                 feedback.innerText = "Construir é ajustar sem perder o essencial.";
-                feedback.className = "mt-4 fw-semibold text-success";
+                feedback.className = "mb-2 fw-semibold text-success";
 
                 // Mostra overlay
                 overlay.classList.remove("d-none");
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             card.classList.add("shake");
             feedback.innerText = "Nem tudo se encaixa de imediato. Ajuste.";
-            feedback.className = "mt-4 fw-semibold text-danger";
+            feedback.className = "mb-2 fw-semibold text-danger";
 
             setTimeout(() => {
                 card.classList.remove("shake");

@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (matches === 3) {
                     feedback.innerText = "Estabilidade é reconhecer, respeitar e permanecer.";
-                    feedback.className = "mt-4 fw-semibold text-success";
+                    feedback.className = "mb-2 fw-semibold text-success";
 
                     overlay.classList.remove("d-none");
                     setTimeout(() => overlay.classList.add("show"), 50);

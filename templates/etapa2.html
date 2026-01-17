@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="row w-100 justify-content-center text-center">
-    <div class="col-11 col-lg-10 p-2 bg-white rounded-3 shadow-sm">
+    <div class="col-11 col-lg-10 p-2 mt-4 mb-4 bg-white rounded-3 shadow-sm">
 
         <h2 class="mb-2 fade-item">
             Capítulo 2: Construção e Compromisso
@@ -14,16 +14,12 @@
             O vínculo se fortalece com convivência, ajuste e escolhas conscientes.
         </p>
 
-        <p class="mb-2 fade-item">
-            Arraste cada carta para o lugar que melhor representa seu papel na construção da relação.
-        </p>
-
         <p class="text-muted small">
             No celular: toque na carta e depois toque no destino.
         </p>
 
         <!-- Cartas -->
-        <div class="d-flex flex-wrap justify-content-center gap-1 mb-3 fade-item" id="cardsContainer">
+        <div class="d-flex flex-wrap justify-content-center gap-1 fade-item" id="cardsContainer">
 
             <div class="game-card" draggable="true" data-target="sustenta">Comunicação</div>
             <div class="game-card" draggable="true" data-target="sustenta">Respeito</div>
@@ -35,15 +31,15 @@
         </div>
 
         <!-- Zonas de destino -->
-        <div class="row g-3 fade-item">
+        <div class="row g-3 m-2 fade-item">
 
-            <div class="col-md-6">
+            <div class="col-md-6 m-0 p-0">
                 <div class="drop-zone" data-zone="sustenta">
                     <h5>Sustenta a relação</h5>
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 m-0 p-0">
                 <div class="drop-zone" data-zone="ajuste">
                     <h5>Precisa de ajuste</h5>
                 </div>
@@ -52,7 +48,7 @@
         </div>
 
         <!-- Feedback -->
-        <div id="feedback" class="mt-4 fw-semibold"></div>
+        <div id="feedback" class="mb-2 fw-semibold"></div>
 
         <!-- Overlay de sucesso -->
         <div id="successOverlay" class="success-overlay d-none">
@@ -64,7 +60,7 @@
 
         <!-- Continuar -->
         <form method="post" action="{{ url_for('etapa2_complete') }}">
-            <button id="continueBtn" class="btn btn-success btn-lg mt-4 w-100 d-none">
+            <button id="continueBtn" class="btn btn-success btn-lg w-100 d-none">
                 Continuar
             </button>
         </form>
