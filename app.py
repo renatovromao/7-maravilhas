@@ -1,6 +1,11 @@
 import os
 from flask import Flask, render_template
 from datetime import datetime
+from flask import request
+import logging
+from zoneinfo import ZoneInfo
+
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 
@@ -10,6 +15,11 @@ def inject_now():
 
 @app.route("/")
 def home():
+    ip = request.headers.get("X-Forwarded-For", request.remote_addr)
+    user_agent = request.headers.get("User-Agent")
+    timestamp = datetime.now(ZoneInfo("America/Sao_Paulo")).strftime("%Y-%m-%d %H:%M:%S")
+
+    logging.info(f"Acesso | DataHora={timestamp} | IP={ip} | UA={user_agent}")
 
     maravilhas = [
         {
