@@ -1,55 +1,66 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Em Busca do Queijo Sagrado</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block title %}
+7 Maravilhas do Mundo
+{% endblock %}
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body class="splash-body bg-white-index">
+{% block content %}
 
-    <div class="splash-container">
+{% for item in maravilhas %}
+<section class="ranking">
 
-        <!-- Imagem principal -->
-        <img
-            src="{{ url_for('static', filename='img/capa.png') }}"
-            alt="Em Busca do Queijo Sagrado"
-            class="splash-image"
-        >
+    <h2>
+        <p class="number">{{ loop.index }}.</p> 
+        {{ item.nome_antes }}
+        <span class="nickname">"{{ item.apelido }}"</span>
+        {{ item.nome_depois }} 
+        <p class="number">{{ item.percentual }}</p> 
+    </h2>
 
-        <!-- Botão pergaminho -->
-        <a href="{{ url_for('login') }}">
-            <!-- Imagem principal -->
-            <img
-                src="{{ url_for('static', filename='img/pergaminho.png') }}"
-                alt="Jogar"
-                class="splash-image-2"
-            >
-        </a>
 
-    </div>
+    <img 
+        src="{{ url_for('static', filename='img/pessoas/' ~ item.imagem) }}"
+        alt="{{ item.titulo }}"
+        class="img-fluid"
+    >
 
-    <!-- Cantos decorativos -->
-    <img src="{{ url_for('static', filename='img/corners/corner-top-left.png') }}"
-        class="corner corner-top-left"
-        alt="Canto superior esquerdo">
+    <p class="caption">
+        {{ item.descricao | safe }}
+    </p>
 
-    <img src="{{ url_for('static', filename='img/corners/corner-top-right.png') }}"
-        class="corner corner-top-right"
-        alt="Canto superior direito">
+</section>
+{% endfor %}
 
-    <img src="{{ url_for('static', filename='img/corners/corner-bottom-left.png') }}"
-        class="corner corner-bottom-left"
-        alt="Canto inferior esquerdo">
+<!-- VÍDEO BÔNUS -->
+<section class="ranking video-bonus">
 
-    <img src="{{ url_for('static', filename='img/corners/corner-bottom-right.png') }}"
-        class="corner corner-bottom-right"
-        alt="Canto inferior direito">
+    <h2>
+        <p class="number">Bônus.</p> Agatha <span class="nickname">"Artista"</span> Amaral
+    </h2>
 
-</body>
-</html>
+    <video
+        id="video-artista"
+        class="img-fluid"
+        muted
+        loop
+        playsinline
+        preload="metadata"
+    >
+        <source src="{{ url_for('static', filename='videos/agatha-artista.mp4') }}" type="video/mp4">
+    </video>
+
+    <p class="caption">
+        Quando o mundo vira tela, ela transforma tudo em <strong>arte</strong>.  
+        Entre traços, cores e ideias, cria universos com uma sensibilidade <strong>única</strong>.  
+        Pintar, desenhar ou sonhar — tudo nela vira <strong>beleza</strong>.
+    </p>
+
+    <p class="caption">
+        Você é uma artista incrível e tem um talento nato.
+        Nunca deixe de expressar sua criatividade e continue encantando eu e o mundo com suas obras!
+        A galeria de arte está sempre aberta para você aqui na sala baby.
+    </p>
+
+</section>
+
+{% endblock %}

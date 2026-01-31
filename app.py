@@ -1,190 +1,77 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+import os
+from flask import Flask, render_template
+from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = "chave-secreta-do-mini-game"
 
-# Nome correto (case insensitive)
-ACCESS_KEYS = ["renato", "agatha"]
+@app.context_processor
+def inject_now():
+    return {'now': datetime.utcnow}
 
-# -------------------------
-# INDEX / APRESENTACAO DO JOGO
-# -------------------------
-@app.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "POST":
-        return redirect(url_for("login"))
-    return render_template("index.html")
+@app.route("/")
+def home():
 
+    maravilhas = [
+        {
+            "nome_antes": "Agatha",
+            "apelido": "Socialite",
+            "nome_depois": "Amaral",
+            "percentual": "100%",
+            "imagem": "maravilha1.jpg",
+            "descricao": 'Ela desfila entre taças de champanhe como quem domina o mundo. Um olhar <strong>sofisticado</strong>, uma postura <strong>inalcançável</strong> e um charme que faz qualquer evento parecer pequeno perto dela.'
+        },
+        {
+            "nome_antes": "Agatha",
+            "apelido": "Cleópatra",
+            "nome_depois": "Amaral",
+            "percentual": "100%",
+            "imagem": "maravilha2.jpg",
+            "descricao": 'Rainha sem precisar de trono, dona de um olhar <strong>hipnotizante</strong> e uma presença <strong>imperial</strong>. Se o Nilo ainda existisse, certamente correria por ela.'
+        },
+        {
+            "nome_antes": "Agatha",
+            "apelido": "Princesa",
+            "nome_depois": "Amaral",
+            "percentual": "100%",
+            "imagem": "maravilha3.jpg",
+            "descricao": 'Delicada como um conto de fadas, mas forte como quem escreve o próprio destino. Um sorriso <strong>doce</strong>, uma alma <strong>encantadora</strong> e um coração real.'
+        },
+        {
+            "nome_antes": "Agatha",
+            "apelido": "Mendiga",
+            "nome_depois": "Amaral",
+            "percentual": "100%",
+            "imagem": "maravilha4.jpg",
+            "descricao": 'Prova viva de que a beleza não mora nas roupas, mas no olhar. Mesmo sem nada, sobra <strong>verdade</strong>, <strong>intensidade</strong> e um charme que dinheiro nenhum compra.'
+        },
+        {
+            "nome_antes": "Agatha",
+            "apelido": "Geek",
+            "nome_depois": "Amaral",
+            "percentual": "100%",
+            "imagem": "maravilha5.jpg",
+            "descricao": 'Entre códigos, referências e universos paralelos, ela é a exceção perfeita. Inteligência <strong>afiada</strong>, humor <strong>imprevisível</strong> e um coração digno de maratona.'
+        },
+        {
+            "nome_antes": "Agatha",
+            "apelido": "Gótica",
+            "nome_depois": "Amaral",
+            "percentual": "100%",
+            "imagem": "maravilha6.jpg",
+            "descricao": 'Mistério em forma de gente. Um olhar <strong>profundo</strong>, uma estética <strong>sombria</strong> e um coração que pulsa poesia no escuro.'
+        },
+        {
+            "nome_antes": "Agatha",
+            "apelido": "Rockeira",
+            "nome_depois": "Amaral",
+            "percentual": "100%",
+            "imagem": "maravilha7.jpg",
+            "descricao": 'Livre, intensa e barulhenta do jeito certo. Vive no volume máximo, ama sem freio e carrega uma alma <strong>indomável</strong> que nunca passa despercebida.'
+        }
+    ]
 
-# -------------------------
-# LOGIN / ESCOLHA PERSONAGEM
-# -------------------------
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    error = None
-
-    if request.method == "GET":
-        session.clear()
-
-    if request.method == "POST":
-        nome = request.form.get("nome", "").strip()
-        personagem = request.form.get("personagem")
-
-        if nome.lower() not in ACCESS_KEYS:
-            error = "Nome incorreto. Tente novamente."
-            return render_template("login.html", error=error)
-
-        if personagem not in ["personagem1", "personagem2"]:
-            error = "Escolha um personagem para continuar."
-            return render_template("login.html", error=error)
-
-        session["autorizado"] = True
-        session["etapa"] = 1
-        session["personagem"] = personagem
-        session["pontos"] = 0
-
-        return redirect(url_for("como_jogar"))
-
-    return render_template("login.html", error=error)
-
-
-# -------------------------
-# COMO JOGAR
-# -------------------------
-@app.route("/como-jogar")
-def como_jogar():
-    if not session.get("autorizado"):
-        return redirect(url_for("login"))
-    return render_template("como_jogar.html")
-
-
-@app.route("/iniciar-jogo", methods=["POST"])
-def iniciar_jogo():
-    if not session.get("autorizado"):
-        return redirect(url_for("login"))
-
-    session["etapa"] = 1
-    return redirect(url_for("etapa1"))
-
-
-# -------------------------
-# ETAPA 1
-# -------------------------
-@app.route("/etapa1")
-def etapa1():
-    if not session.get("autorizado") or session.get("etapa") != 1:
-        return redirect(url_for("login"))
-    return render_template("etapa1.html")
-
-
-@app.route("/etapa1/complete", methods=["POST"])
-def etapa1_complete():
-    if not session.get("autorizado"):
-        return redirect(url_for("login"))
-
-    session["pontos"] += 10
-    session["etapa"] = 2
-    return redirect(url_for("etapa2"))
-
-
-# -------------------------
-# ETAPA 2
-# -------------------------
-@app.route("/etapa2")
-def etapa2():
-    if not session.get("autorizado") or session.get("etapa") != 2:
-        return redirect(url_for("login"))
-    return render_template("etapa2.html")
-
-
-@app.route("/etapa2/complete", methods=["POST"])
-def etapa2_complete():
-    if not session.get("autorizado"):
-        return redirect(url_for("login"))
-
-    session["pontos"] += 10
-    session["etapa"] = 3
-    return redirect(url_for("etapa3"))
-
-
-# -------------------------
-# ETAPA 3
-# -------------------------
-@app.route("/etapa3")
-def etapa3():
-    if not session.get("autorizado") or session.get("etapa") != 3:
-        return redirect(url_for("login"))
-    return render_template("etapa3.html")
-
-
-@app.route("/etapa3/complete", methods=["POST"])
-def etapa3_complete():
-    if not session.get("autorizado"):
-        return redirect(url_for("login"))
-
-    session["pontos"] += 10
-    session["etapa"] = 4
-    return redirect(url_for("etapa4"))
-
-
-# -------------------------
-# ETAPA 4
-# -------------------------
-@app.route("/etapa4")
-def etapa4():
-    if not session.get("autorizado") or session.get("etapa") != 4:
-        return redirect(url_for("login"))
-    return render_template("etapa4.html")
-
-
-@app.route("/etapa4/complete", methods=["POST"])
-def etapa4_complete():
-    if not session.get("autorizado"):
-        return redirect(url_for("login"))
-
-    # Marca que chegou ao final (tela final virá depois)
-    session["pontos"] += 10
-    session["etapa"] = "final"
-    return redirect(url_for("final"))
-
-
-# -------------------------
-# TELA FINAL
-# -------------------------
-@app.route("/final")
-def final():
-    if not session.get("autorizado") or session.get("etapa") != "final":
-        return redirect(url_for("login"))
-    return render_template("final.html")
-
-
-# -------------------------
-# REINICIAR (volta etapa 1)
-# -------------------------
-@app.route("/reiniciar", methods=["POST"])
-def reiniciar():
-    if not session.get("autorizado"):
-        return redirect(url_for("login"))
-
-    session["pontos"] = 0
-    session["etapa"] = 1
-    return redirect(url_for("etapa1"))
-
-
-# -------------------------
-# SAIR (volta login)
-# -------------------------
-@app.route("/sair", methods=["POST"])
-def sair():
-    session.clear()
-    return redirect(url_for("index"))
-
-
-# -------------------------
-# START
-# -------------------------
-#if __name__ == "__main__":
-#    app.run(debug=True)
+    return render_template("index.html", maravilhas=maravilhas)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
