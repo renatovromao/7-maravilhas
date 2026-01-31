@@ -9,20 +9,21 @@ Estas são as 7 mulheres mais lindas do mundo
 {% for item in maravilhas %}
 <section class="ranking">
 
-    <h2>
-        <p class="number">{{ loop.index }}.</p> 
+    <h2 class="ranking-title">
+        <span class="number">{{ loop.index }}.</span>
         {{ item.nome_antes }}
         <span class="nickname">"{{ item.apelido }}"</span>
-        {{ item.nome_depois }} 
-        <p class="number">{{ item.percentual }}</p> 
+        {{ item.nome_depois }}
+        <span class="number">{{ item.percentual }}</span>
     </h2>
 
-
-    <img 
-        src="{{ url_for('static', filename='img/pessoas/' ~ item.imagem) }}"
-        alt="{{ item.titulo }}"
-        class="img-fluid"
-    >
+    <div class="media-block">
+        <img 
+            src="{{ url_for('static', filename='img/pessoas/' ~ item.imagem) }}"
+            alt="{{ item.titulo }}"
+            class="img-fluid"
+        >
+    </div>
 
     <p class="caption">
         {{ item.descricao | safe }}
@@ -34,20 +35,23 @@ Estas são as 7 mulheres mais lindas do mundo
 <!-- VÍDEO BÔNUS -->
 <section class="ranking video-bonus">
 
-    <h2>
-        <p class="number">Bônus.</p> Agatha <span class="nickname">"Artista"</span> Amaral
+    <h2 class="ranking-title">
+        <span class="number">Bônus.</span>
+        Agatha <span class="nickname">"Artista"</span> Amaral
     </h2>
 
-    <video
-        id="video-artista"
-        class="img-fluid"
-        muted
-        loop
-        playsinline
-        preload="metadata"
-    >
-        <source src="{{ url_for('static', filename='videos/agatha-artista.mp4') }}" type="video/mp4">
-    </video>
+    <div class="media-block">
+        <video
+            id="video-artista"
+            class="img-fluid"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+        >
+            <source src="{{ url_for('static', filename='videos/agatha-artista.mp4') }}" type="video/mp4">
+        </video>
+    </div>
 
     <p class="caption">
         Quando o mundo vira tela, ela transforma tudo em <strong>arte</strong>.  

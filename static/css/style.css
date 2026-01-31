@@ -129,6 +129,16 @@ main {
     line-height: 2.25rem;
     letter-spacing: -0.09375rem;
     color: #1f1d1d;
+    margin-bottom: 16px;
+}
+
+.editorial-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.editorial-header .subtitle {
+    margin-bottom: 18px;
 }
 
 .subtitle {
@@ -164,11 +174,23 @@ main {
     margin-bottom: 10px;
 }
 
-.caption {
-    font-size: 1.125rem;
+.ranking-title {
+    max-width: 680px;
+    margin: 0 auto 14px auto;
+
+    font-size: 1.1rem;
+    font-weight: 600;
     color: #333;
-    letter-spacing: -.03125rem;
+}
+
+.caption {
+    max-width: 680px;
+    margin: 0 auto 24px auto;
+
+    font-size: 1.125rem;
     line-height: 1.75rem;
+    letter-spacing: -.03125rem;
+    color: #333;
 }
 
 .caption strong {
@@ -204,8 +226,8 @@ main {
 }
 
 .number {
-    display: inline-block;
-    font-weight: 100;
+    font-weight: 400;
+    margin-right: 4px;
 }
 
 .nickname {
@@ -224,6 +246,10 @@ main {
 
 .video-bonus video {
     box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.video-bonus .media-block {
+    margin-top: 16px;
 }
 
 .social-icons {
@@ -248,4 +274,9 @@ main {
     width: 16px;
     height: 16px;
     fill: #fff;
+}
+
+.media-block {
+    max-width: 680px;
+    margin: 0 auto 12px auto;
 }
